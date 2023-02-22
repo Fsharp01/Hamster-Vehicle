@@ -49,6 +49,15 @@
 	<!-- Cartographer --> 
 	<include file="$(find mapping_controller)/launch/mapping/karto.launch"/>
           
+          
+          <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <param name="controller_frequency" value="10.0"/>
+    <rosparam file="$(find hamster_vehicle)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find hamster_vehicle)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find hamster_vehicle)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find hamster_vehicle)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find hamster_vehicle)/config/trajectory_planner.yaml" command="load" />
+  </node>
 	 	
 	<node name="transform_map_odom" pkg="tf2_ros" type="static_transform_publisher" args="0.0 0.0 0.0 0 0 0 1 map agent1/odom" />
 	
